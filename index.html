@@ -8,13 +8,65 @@
   </head>
   <body>
     <h1>Banking system</h1>
-    <p>계좌번호를 입력하세요</p>
-    <input type="text" id="accountNumber" placeholder="계좌번호" />
+    <input type="text" id="accountNumber" placeholder="계좌번호를 입력하세요" />
     <p>은행을 선택하세요</p>
-    <select id="bankSelect">
-      <option value="bank1">신한은행</option>
-      <option value="bank2">하나은행</option>
-      <option value="bank3">국민은행</option>
+    <script>
+      function detectBank() {
+        const input = document.getElementById("accountNumber").value;
+        const bankName = document.getElementById("bankName");
+
+        // 앞자리 추출 (앞의 3~4자리)
+        const prefix3 = input.substring(0, 3);
+        const prefix4 = input.substring(0, 4);
+
+        let result = "알 수 없음";
+
+        if (prefix3 === "110") {
+          result = "신한은행";
+        } else if (prefix3 === "100") {
+          result = "우리은행";
+        } else if (
+          prefix3 === "301" ||
+          prefix3 === "302" ||
+          prefix3 === "352" ||
+          prefix3 === "356"
+        ) {
+          result = "농협은행";
+        } else if (prefix4 === "3333") {
+          result = "카카오뱅크";
+        } else if (prefix4 === "1000") {
+          result = "토스뱅크";
+        } else if (
+          prefix3 === "081" ||
+          prefix3 === "005" ||
+          prefix3 === "002"
+        ) {
+          result = "하나은행";
+        } else if (
+          prefix3 === "003" ||
+          prefix3 === "010" ||
+          prefix3 === "020"
+        ) {
+          result = "기업은행 (IBK)";
+        } else if (prefix3 === "103") {
+          result = "대구은행";
+        } else if (prefix3 === "112") {
+          result = "부산은행";
+        } else if (prefix3 === "039") {
+          result = "경남은행";
+        } else if (prefix3 === "034") {
+          result = "광주은행";
+        } else if (prefix3 === "037") {
+          result = "전북은행";
+        } else if (prefix3 === "035") {
+          result = "제주은행";
+        } else if (prefix3 === "033" || prefix3 === "652") {
+          result = "SC제일은행";
+        }
+
+        bankName.textContent = "은행명: " + result;
+      }
+    </script>
     <button onclick="sayHello()">이체하기</button>
     <script src="script.js"></script>
   </body>
